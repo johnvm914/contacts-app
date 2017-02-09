@@ -9,6 +9,13 @@
   </head>
 
   <body>
+    <% if session[:user_id] %>
+      <a href="/logout">Log Out</a>
+    <% else %>
+      <a href="/login">Log In</a>
+      <a href="/signup">Sign Up</a>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

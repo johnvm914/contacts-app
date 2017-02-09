@@ -4,6 +4,10 @@
   <p>email: <%= @contact.email %></p>
   <p>Phone number: <%= @contact.phone_number %></p>
   <p>Bio: <%= @contact.bio %></p>
+  <p>Groups:
+  <% @contact.groups.each do |group| %>
+    <%= group.category %>
+  <% end %>
   <p>Updated on: <%= @contact.updated_at_time %></p>
   <p>Latitude: <%= @contact.latitude %></p>
   <p>Longitude: <%= @contact.longitude %></p>

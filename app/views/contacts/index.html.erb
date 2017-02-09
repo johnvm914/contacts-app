@@ -1,9 +1,25 @@
-<h1>Here are all your contacts:</h1>
-<% @contacts.each do |contact| %>
-  <p>Name: <%= contact.first_name %><%= contact.last_name %></p>
-  <p>Email: <%= contact.email %></p>
-  <p>Phone Number: <%= contact.phone_number %></p>
-  <p>Latitude: <%= contact.latitude %></p>
-  <p>Longitude: <%= contact.longitude %></p>
+<% if current_user %>
+  <%= form_tag "/contacts", method: :get do %>
+    <input type="text" name="search_result" placeholder="Search">
+    <input type="submit" value="Submit">
+  <% end %>
+  Filter by group:
+  <% Group.all.each do |group| %>
+    <a href="contacts?group=<%= group.category %>"><%= group.category.capitalize %></a>
+  <% end %><br>
+  <% if @search_result %>
+    <h1>Here are your selected contacts:</h1>
+  <% else %>
+    <h1>Here are all your <%= @group_result %> contacts:</h1>
+  <% end %>
+  <% @contacts.each do |contact| %>
+    <p>Name: <%= contact.full_name %></p>
+    <p>Email: <%= contact.email %></p>
+    <p>Phone Number: <%= contact.phone_number %></p>
+    <p>Latitude: <%= contact.latitude %></p>
+    <p>Longitude: <%= contact.longitude %></p>
+  <% end %>
+<% else %>
+  <p>Please log in to view your contacts.</p>
 <% end %>
 
